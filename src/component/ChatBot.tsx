@@ -61,13 +61,9 @@ const Chatbot = () => {
         { content: `${botMessage}\n\n${disclaimer}`, role: "assistant" },
       ]);
     } catch (err) {
-  const error: any = err; // 👈 this fixes the TS error
-
-  console.error(
-    "API ERROR FULL:",
-    error?.response?.data || error?.message || error
-  );
-
+  const error: any = err;
+  // Log the full error response
+  console.error("API ERROR FULL:", error?.response?.data || error?.message || error);
   setMessages((prev) => [
     ...prev,
     { content: "Sorry, something went wrong.", role: "assistant" },
