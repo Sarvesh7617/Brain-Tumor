@@ -98,17 +98,31 @@ const Detection = () => {
         {/* LEFT PANEL */}
         <div className="w-full sm:w-1/3 flex justify-center">
           <div
-            className="border-2 bg-gray-400 border-black relative w-full max-w-xs sm:max-w-sm aspect-square rounded-md"
+            className="border-2 bg-gray-400 border-black relative w-full max-w-xs sm:max-w-sm aspect-square rounded-md h-fit"
           >
-            {preview && (
-              <img
-                src={preview}
-                className="w-full h-full rounded-md object-cover"
-                alt="Preview"
-              />
-            )}
+            {preview? (
+              <div className="relative w-full h-fit">
+                <img
+                  src={preview}
+                  className="w-full h-full rounded-md object-cover"
+                  alt="Preview"
+                />
 
-            {!preview && (
+                {result?.mask_image && (
+                  <img
+                    src={`http://127.0.0.1:5000/${result.mask_image}`}
+                    alt="Mask Overlay"
+                    className="absolute top-0 left-0 w-full h-full object-cover bg-red-500"
+                    style={{
+                      mixBlendMode: "multiply",
+                      opacity: 0.8,
+                      filter: "invert(1) sepia(1) saturate(1000%) hue-rotate(-50deg)"
+                    }}
+                  />
+                )}
+
+              </div>
+            ):(
               <div
                 className="absolute cursor-pointer inset-0 flex items-center justify-center"
                 onClick={() => fileInputRef.current.click()}
